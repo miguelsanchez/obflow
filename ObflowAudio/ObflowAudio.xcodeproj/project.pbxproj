@@ -1,0 +1,432 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BD74BB381FB4A856000D42A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD74BB371FB4A856000D42A3 /* AppDelegate.swift */; };
+		BD74BB3A1FB4A856000D42A3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD74BB391FB4A856000D42A3 /* ViewController.swift */; };
+		BD74BB3D1FB4A856000D42A3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD74BB3B1FB4A856000D42A3 /* Main.storyboard */; };
+		BD74BB3F1FB4A856000D42A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD74BB3E1FB4A856000D42A3 /* Assets.xcassets */; };
+		BD74BB421FB4A856000D42A3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD74BB401FB4A856000D42A3 /* LaunchScreen.storyboard */; };
+		BD74BB4E1FB4A8B7000D42A3 /* AudioController.mm in Sources */ = {isa = PBXBuildFile; fileRef = BD74BB4D1FB4A8B7000D42A3 /* AudioController.mm */; };
+		BD74BB511FB4A8EE000D42A3 /* AudioListener.mm in Sources */ = {isa = PBXBuildFile; fileRef = BD74BB4F1FB4A8EE000D42A3 /* AudioListener.mm */; };
+		BD74BB541FB4A922000D42A3 /* SharedBuffer.c in Sources */ = {isa = PBXBuildFile; fileRef = BD74BB531FB4A922000D42A3 /* SharedBuffer.c */; };
+		BD74BB6C1FB4AA7A000D42A3 /* Vokaturi9.c in Sources */ = {isa = PBXBuildFile; fileRef = BD74BB621FB4AA79000D42A3 /* Vokaturi9.c */; };
+		BD74BB6D1FB4AA7A000D42A3 /* READ_ME.TXT in Resources */ = {isa = PBXBuildFile; fileRef = BD74BB631FB4AA79000D42A3 /* READ_ME.TXT */; };
+		BD74BB701FB4AC39000D42A3 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD74BB6F1FB4AC2A000D42A3 /* CoreAudio.framework */; };
+		BD74BB721FB4AC4A000D42A3 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD74BB711FB4AC44000D42A3 /* AudioToolbox.framework */; };
+		BD74BB741FB4AC5C000D42A3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD74BB731FB4AC54000D42A3 /* AVFoundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		BD74BB341FB4A856000D42A3 /* ObflowAudio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ObflowAudio.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD74BB371FB4A856000D42A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		BD74BB391FB4A856000D42A3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		BD74BB3C1FB4A856000D42A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		BD74BB3E1FB4A856000D42A3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BD74BB411FB4A856000D42A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		BD74BB431FB4A856000D42A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BD74BB4B1FB4A8B6000D42A3 /* ObflowAudio-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ObflowAudio-Bridging-Header.h"; sourceTree = "<group>"; };
+		BD74BB4C1FB4A8B7000D42A3 /* AudioController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioController.h; sourceTree = "<group>"; };
+		BD74BB4D1FB4A8B7000D42A3 /* AudioController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioController.mm; sourceTree = "<group>"; };
+		BD74BB4F1FB4A8EE000D42A3 /* AudioListener.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioListener.mm; sourceTree = "<group>"; };
+		BD74BB501FB4A8EE000D42A3 /* AudioListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioListener.h; sourceTree = "<group>"; };
+		BD74BB521FB4A922000D42A3 /* SharedBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedBuffer.h; sourceTree = "<group>"; };
+		BD74BB531FB4A922000D42A3 /* SharedBuffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SharedBuffer.c; sourceTree = "<group>"; };
+		BD74BB571FB4AA78000D42A3 /* PAIRWISE_SUM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PAIRWISE_SUM.h; path = "OpenVokaturi-2-2a/PAIRWISE_SUM.h"; sourceTree = SOURCE_ROOT; };
+		BD74BB581FB4AA79000D42A3 /* Sound_and_Pitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Sound_and_Pitch.h; path = "OpenVokaturi-2-2a/Sound_and_Pitch.h"; sourceTree = SOURCE_ROOT; };
+		BD74BB591FB4AA79000D42A3 /* flint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = flint.h; path = "OpenVokaturi-2-2a/flint.h"; sourceTree = SOURCE_ROOT; };
+		BD74BB5A1FB4AA79000D42A3 /* Sound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Sound.h; path = "OpenVokaturi-2-2a/Sound.h"; sourceTree = SOURCE_ROOT; };
+		BD74BB5B1FB4AA79000D42A3 /* Network9-100-20.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Network9-100-20.h"; path = "OpenVokaturi-2-2a/Network9-100-20.h"; sourceTree = SOURCE_ROOT; };
+		BD74BB5C1FB4AA79000D42A3 /* Sound_save.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Sound_save.h; path = "OpenVokaturi-2-2a/Sound_save.h"; sourceTree = SOURCE_ROOT; };
+		BD74BB5D1FB4AA79000D42A3 /* Thing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Thing.h; path = "OpenVokaturi-2-2a/Thing.h"; sourceTree = SOURCE_ROOT; };
+		BD74BB5E1FB4AA79000D42A3 /* Spectrum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Spectrum.h; path = "OpenVokaturi-2-2a/Spectrum.h"; sourceTree = SOURCE_ROOT; };
+		BD74BB5F1FB4AA79000D42A3 /* Sound_and_Spectrum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Sound_and_Spectrum.h; path = "OpenVokaturi-2-2a/Sound_and_Spectrum.h"; sourceTree = SOURCE_ROOT; };
+		BD74BB611FB4AA79000D42A3 /* Emotions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Emotions.h; path = "OpenVokaturi-2-2a/Emotions.h"; sourceTree = SOURCE_ROOT; };
+		BD74BB621FB4AA79000D42A3 /* Vokaturi9.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Vokaturi9.c; path = "OpenVokaturi-2-2a/Vokaturi9.c"; sourceTree = SOURCE_ROOT; };
+		BD74BB631FB4AA79000D42A3 /* READ_ME.TXT */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = READ_ME.TXT; path = "OpenVokaturi-2-2a/READ_ME.TXT"; sourceTree = SOURCE_ROOT; };
+		BD74BB641FB4AA79000D42A3 /* fft_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fft_c.h; path = "OpenVokaturi-2-2a/fft_c.h"; sourceTree = SOURCE_ROOT; };
+		BD74BB651FB4AA79000D42A3 /* Vokaturi9.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Vokaturi9.h; path = "OpenVokaturi-2-2a/Vokaturi9.h"; sourceTree = SOURCE_ROOT; };
+		BD74BB661FB4AA79000D42A3 /* Pitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Pitch.h; path = "OpenVokaturi-2-2a/Pitch.h"; sourceTree = SOURCE_ROOT; };
+		BD74BB671FB4AA79000D42A3 /* Cues9.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Cues9.h; path = "OpenVokaturi-2-2a/Cues9.h"; sourceTree = SOURCE_ROOT; };
+		BD74BB681FB4AA79000D42A3 /* Vokaturi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Vokaturi.h; path = "OpenVokaturi-2-2a/Vokaturi.h"; sourceTree = SOURCE_ROOT; };
+		BD74BB691FB4AA79000D42A3 /* WavFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WavFile.h; path = "OpenVokaturi-2-2a/WavFile.h"; sourceTree = SOURCE_ROOT; };
+		BD74BB6A1FB4AA7A000D42A3 /* VokaturiQuality.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VokaturiQuality.h; path = "OpenVokaturi-2-2a/VokaturiQuality.h"; sourceTree = SOURCE_ROOT; };
+		BD74BB6F1FB4AC2A000D42A3 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		BD74BB711FB4AC44000D42A3 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		BD74BB731FB4AC54000D42A3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BD74BB311FB4A856000D42A3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BD74BB741FB4AC5C000D42A3 /* AVFoundation.framework in Frameworks */,
+				BD74BB721FB4AC4A000D42A3 /* AudioToolbox.framework in Frameworks */,
+				BD74BB701FB4AC39000D42A3 /* CoreAudio.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BD74BB2B1FB4A856000D42A3 = {
+			isa = PBXGroup;
+			children = (
+				BD74BB4B1FB4A8B6000D42A3 /* ObflowAudio-Bridging-Header.h */,
+				BD74BB561FB4AA58000D42A3 /* OpenVokaturi-2-2a */,
+				BD74BB361FB4A856000D42A3 /* ObflowAudio */,
+				BD74BB351FB4A856000D42A3 /* Products */,
+				BD74BB6E1FB4AC2A000D42A3 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		BD74BB351FB4A856000D42A3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BD74BB341FB4A856000D42A3 /* ObflowAudio.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BD74BB361FB4A856000D42A3 /* ObflowAudio */ = {
+			isa = PBXGroup;
+			children = (
+				BD74BB551FB4A927000D42A3 /* vokaturi */,
+				BD74BB371FB4A856000D42A3 /* AppDelegate.swift */,
+				BD74BB391FB4A856000D42A3 /* ViewController.swift */,
+				BD74BB3B1FB4A856000D42A3 /* Main.storyboard */,
+				BD74BB3E1FB4A856000D42A3 /* Assets.xcassets */,
+				BD74BB401FB4A856000D42A3 /* LaunchScreen.storyboard */,
+				BD74BB431FB4A856000D42A3 /* Info.plist */,
+			);
+			path = ObflowAudio;
+			sourceTree = "<group>";
+		};
+		BD74BB551FB4A927000D42A3 /* vokaturi */ = {
+			isa = PBXGroup;
+			children = (
+				BD74BB531FB4A922000D42A3 /* SharedBuffer.c */,
+				BD74BB521FB4A922000D42A3 /* SharedBuffer.h */,
+				BD74BB501FB4A8EE000D42A3 /* AudioListener.h */,
+				BD74BB4F1FB4A8EE000D42A3 /* AudioListener.mm */,
+				BD74BB4C1FB4A8B7000D42A3 /* AudioController.h */,
+				BD74BB4D1FB4A8B7000D42A3 /* AudioController.mm */,
+			);
+			path = vokaturi;
+			sourceTree = "<group>";
+		};
+		BD74BB561FB4AA58000D42A3 /* OpenVokaturi-2-2a */ = {
+			isa = PBXGroup;
+			children = (
+				BD74BB671FB4AA79000D42A3 /* Cues9.h */,
+				BD74BB611FB4AA79000D42A3 /* Emotions.h */,
+				BD74BB641FB4AA79000D42A3 /* fft_c.h */,
+				BD74BB591FB4AA79000D42A3 /* flint.h */,
+				BD74BB5B1FB4AA79000D42A3 /* Network9-100-20.h */,
+				BD74BB571FB4AA78000D42A3 /* PAIRWISE_SUM.h */,
+				BD74BB661FB4AA79000D42A3 /* Pitch.h */,
+				BD74BB631FB4AA79000D42A3 /* READ_ME.TXT */,
+				BD74BB581FB4AA79000D42A3 /* Sound_and_Pitch.h */,
+				BD74BB5F1FB4AA79000D42A3 /* Sound_and_Spectrum.h */,
+				BD74BB5C1FB4AA79000D42A3 /* Sound_save.h */,
+				BD74BB5A1FB4AA79000D42A3 /* Sound.h */,
+				BD74BB5E1FB4AA79000D42A3 /* Spectrum.h */,
+				BD74BB5D1FB4AA79000D42A3 /* Thing.h */,
+				BD74BB681FB4AA79000D42A3 /* Vokaturi.h */,
+				BD74BB621FB4AA79000D42A3 /* Vokaturi9.c */,
+				BD74BB651FB4AA79000D42A3 /* Vokaturi9.h */,
+				BD74BB6A1FB4AA7A000D42A3 /* VokaturiQuality.h */,
+				BD74BB691FB4AA79000D42A3 /* WavFile.h */,
+			);
+			name = "OpenVokaturi-2-2a";
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		BD74BB6E1FB4AC2A000D42A3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BD74BB731FB4AC54000D42A3 /* AVFoundation.framework */,
+				BD74BB711FB4AC44000D42A3 /* AudioToolbox.framework */,
+				BD74BB6F1FB4AC2A000D42A3 /* CoreAudio.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BD74BB331FB4A856000D42A3 /* ObflowAudio */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BD74BB461FB4A857000D42A3 /* Build configuration list for PBXNativeTarget "ObflowAudio" */;
+			buildPhases = (
+				BD74BB301FB4A856000D42A3 /* Sources */,
+				BD74BB311FB4A856000D42A3 /* Frameworks */,
+				BD74BB321FB4A856000D42A3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ObflowAudio;
+			productName = ObflowAudio;
+			productReference = BD74BB341FB4A856000D42A3 /* ObflowAudio.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BD74BB2C1FB4A856000D42A3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0900;
+				LastUpgradeCheck = 0900;
+				ORGANIZATIONNAME = "Ivan Bella Lopez";
+				TargetAttributes = {
+					BD74BB331FB4A856000D42A3 = {
+						CreatedOnToolsVersion = 9.0.1;
+						LastSwiftMigration = 0900;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = BD74BB2F1FB4A856000D42A3 /* Build configuration list for PBXProject "ObflowAudio" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BD74BB2B1FB4A856000D42A3;
+			productRefGroup = BD74BB351FB4A856000D42A3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BD74BB331FB4A856000D42A3 /* ObflowAudio */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BD74BB321FB4A856000D42A3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BD74BB421FB4A856000D42A3 /* LaunchScreen.storyboard in Resources */,
+				BD74BB3F1FB4A856000D42A3 /* Assets.xcassets in Resources */,
+				BD74BB6D1FB4AA7A000D42A3 /* READ_ME.TXT in Resources */,
+				BD74BB3D1FB4A856000D42A3 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BD74BB301FB4A856000D42A3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BD74BB6C1FB4AA7A000D42A3 /* Vokaturi9.c in Sources */,
+				BD74BB541FB4A922000D42A3 /* SharedBuffer.c in Sources */,
+				BD74BB511FB4A8EE000D42A3 /* AudioListener.mm in Sources */,
+				BD74BB3A1FB4A856000D42A3 /* ViewController.swift in Sources */,
+				BD74BB4E1FB4A8B7000D42A3 /* AudioController.mm in Sources */,
+				BD74BB381FB4A856000D42A3 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		BD74BB3B1FB4A856000D42A3 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BD74BB3C1FB4A856000D42A3 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		BD74BB401FB4A856000D42A3 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BD74BB411FB4A856000D42A3 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BD74BB441FB4A857000D42A3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		BD74BB451FB4A857000D42A3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BD74BB471FB4A857000D42A3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KZZD887PV8;
+				INFOPLIST_FILE = ObflowAudio/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.oblong.ObflowAudio;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ObflowAudio-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BD74BB481FB4A857000D42A3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KZZD887PV8;
+				INFOPLIST_FILE = ObflowAudio/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.oblong.ObflowAudio;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ObflowAudio-Bridging-Header.h";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BD74BB2F1FB4A856000D42A3 /* Build configuration list for PBXProject "ObflowAudio" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BD74BB441FB4A857000D42A3 /* Debug */,
+				BD74BB451FB4A857000D42A3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BD74BB461FB4A857000D42A3 /* Build configuration list for PBXNativeTarget "ObflowAudio" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BD74BB471FB4A857000D42A3 /* Debug */,
+				BD74BB481FB4A857000D42A3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BD74BB2C1FB4A856000D42A3 /* Project object */;
+}
