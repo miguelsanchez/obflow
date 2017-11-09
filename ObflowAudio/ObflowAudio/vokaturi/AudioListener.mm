@@ -127,12 +127,6 @@
 				emotionProbabilities.anger,
 				emotionProbabilities.fear
 			);
-      
-      printf("\n\nneutrality: %f", emotionProbabilities.neutrality);
-      printf("\nhappiness: %f", emotionProbabilities.happiness);
-      printf("\nsadness: %f", emotionProbabilities.sadness);
-      printf("\nanger: %f", emotionProbabilities.anger);
-      printf("\nfear: %f", emotionProbabilities.fear);
 		}
 	}
 }
