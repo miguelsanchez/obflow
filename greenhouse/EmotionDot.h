@@ -18,6 +18,8 @@ struct EmotionDot  :  public Points
   float64 maxValence;
   float64 minValence;
 
+  Color color;
+
   EmotionDot (float64 r) : Points ()
   {
     radius = r;
@@ -29,7 +31,7 @@ struct EmotionDot  :  public Points
     SetVertexLoc (0, Loc ());
 
     SetPointSize(0, 50);
-    SetVertexColor (0, Color (1.0, 1.0, 1.0, 1.0));
+    SetVertexColor (0, color);
 
     SetVerticesReady ();
 

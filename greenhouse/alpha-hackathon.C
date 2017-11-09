@@ -43,6 +43,7 @@ struct Backgrounder  :  public Sketch
     participants.Append (p);
 
     EmotionDot *pp = new EmotionDot(radius);
+    pp->color = Color(1.0, 1.0, 1.0, 0.4);
     AppendKid (pp);
     emotions.Append (pp);
   }
