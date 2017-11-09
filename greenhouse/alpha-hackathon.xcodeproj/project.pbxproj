@@ -33,7 +33,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		5649DC4016F921580048F7B1 /* alpha-hackathon */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = alpha-hackathon; sourceTree = BUILT_PRODUCTS_DIR; };
+		491EE2701FB4ED5D0084BA1B /* EmotionDot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmotionDot.h; sourceTree = "<group>"; };
+		491EE2711FB4EE8C0084BA1B /* Participant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Participant.h; sourceTree = "<group>"; };
+		5649DC4016F921580048F7B1 /* alpha-hackathon */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "alpha-hackathon"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5649DC4D16F921CF0048F7B1 /* libBasement.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libBasement.2.dylib; path = "/opt/oblong/deps-64-8/.bon-jovi/lib/libBasement.2.dylib"; sourceTree = "<absolute>"; };
 		5649DC4E16F921CF0048F7B1 /* libImpetus.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libImpetus.2.dylib; path = "/opt/oblong/deps-64-8/.bon-jovi/lib/libImpetus.2.dylib"; sourceTree = "<absolute>"; };
 		5649DC4F16F921CF0048F7B1 /* libLoam.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libLoam.2.dylib; path = "/opt/oblong/deps-64-8/.bon-jovi/lib/libLoam.2.dylib"; sourceTree = "<absolute>"; };
@@ -44,7 +46,7 @@
 		5649DC5416F921CF0048F7B1 /* libPlasma++.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libPlasma++.2.dylib"; path = "/opt/oblong/deps-64-8/.bon-jovi/lib/libPlasma++.2.dylib"; sourceTree = "<absolute>"; };
 		5649DC5D16F921E20048F7B1 /* libGreenhouse.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGreenhouse.dylib; path = /opt/oblong/greenhouse/lib/libGreenhouse.dylib; sourceTree = "<absolute>"; };
 		5649DC5F16F921F60048F7B1 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = ../../../../../System/Library/Frameworks/OpenGL.framework; sourceTree = "<group>"; };
-		5649DC6116F9234D0048F7B1 /* alpha-hackathon.C */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = alpha-hackathon.C; sourceTree = "<group>"; };
+		5649DC6116F9234D0048F7B1 /* alpha-hackathon.C */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "alpha-hackathon.C"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,8 @@
 		5649DC3516F921580048F7B1 = {
 			isa = PBXGroup;
 			children = (
+				491EE2711FB4EE8C0084BA1B /* Participant.h */,
+				491EE2701FB4ED5D0084BA1B /* EmotionDot.h */,
 				5649DC5F16F921F60048F7B1 /* OpenGL.framework */,
 				5649DC5D16F921E20048F7B1 /* libGreenhouse.dylib */,
 				5649DC4D16F921CF0048F7B1 /* libBasement.2.dylib */,
@@ -109,8 +113,8 @@
 			);
 			dependencies = (
 			);
-			name = alpha-hackathon;
-			productName = alpha-hackathon;
+			name = "alpha-hackathon";
+			productName = "alpha-hackathon";
 			productReference = 5649DC4016F921580048F7B1 /* alpha-hackathon */;
 			productType = "com.apple.product-type.tool";
 		};

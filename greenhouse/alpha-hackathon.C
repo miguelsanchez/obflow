@@ -2,6 +2,8 @@
 
 
 #include "Greenhouse.h"
+#include "EmotionDot.h"
+#include "Participant.h"
 
 /**
   When using new resource files please be sure to do the following in order to
@@ -21,62 +23,14 @@
 **/
 
 
-struct Participant  :  public Thing
-{
-  Color color;
-
-  float64 radius;
-
-  float64 maxArausal;
-  float64 minArausal;
-  float64 maxValence;
-  float64 minValence;
-
-  Participant() : Thing ()
-  {
-    radius = 50.0;
-    maxArausal = 1.0;
-    minArausal = 0.0;
-    maxValence = 0.4;
-    minValence = 0.6;
-
-    color = Color(0.0, 0.0, 1.0, 1.0);
-  }
-
-  void DrawSelf ()
-  {
-    glLineWidth (2.0);
-
-    glColor4f (color.R(), color.G(), color.B(), 1.0);
-
-    glBegin (GL_LINES);
-    glVertex (Vect(0, maxArausal * radius, 0));
-    glVertex (Vect(0.5 * radius, 0.5 * radius, 0));
-    glVertex (Vect(0.5 * radius, 0.5 * radius, 0));
-    glVertex (Vect(maxValence * radius, 0, 0));
-    glVertex (Vect(maxValence * radius, 0, 0));
-    glVertex (Vect(0.5 * radius, -0.5 * radius, 0));
-    glVertex (Vect(0.5 * radius, -0.5 * radius, 0));
-    glVertex (Vect(0, -minArausal * radius, 0));
-    glVertex (Vect(0, -minArausal * radius, 0));
-    glVertex (Vect(-0.5 * radius, -0.5 * radius, 0));
-    glVertex (Vect(-0.5 * radius, -0.5 * radius, 0));
-    glVertex (Vect(-minValence * radius, 0, 0));
-    glVertex (Vect(-minValence * radius, 0, 0));
-    glVertex (Vect(-0.5 * radius, 0.5 * radius, 0));
-    glVertex (Vect(-0.5 * radius, 0.5 * radius, 0));
-    glVertex (Vect(0, maxArausal * radius, 0));
-    glEnd ();
-  }
-};
-
-
-struct Backgrounder  :  public Thing
+struct Backgrounder  :  public Sketch
 {
   float64 radius;
   Trove<Participant *> participants;
+  Trove<EmotionDot *> emotions;
 
-  Backgrounder() : Thing ()
+
+  Backgrounder() : Sketch ()
   {
     ParticipateInPool ("hackathon");
 
@@ -84,70 +38,114 @@ struct Backgrounder  :  public Thing
 
     Participant *p = new Participant();
     AppendKid (p);
-    p -> color = Color(0.0, 0.0, 1.0, 1.0);
+    p->color = Color(0.0, 0.0, 1.0, 1.0);
+    p->radius = radius;
     participants.Append (p);
+
+    EmotionDot *pp = new EmotionDot(radius);
+    AppendKid (pp);
+    emotions.Append (pp);
   }
 
   void Metabolize (const Protein &p)
   {
-    if (HasDescrip (p, "background"))
+    if (HasDescrip (p, "ms-emotion"))
     {
-      if (HasIngest (p, "green"))
-        SetFeldsColor (0.0, 1.0, 0.0);
-      else if (HasIngest (p, "blue"))
-        SetFeldsColor (0.0, 0.0, 1.0);
-      else if (HasIngest (p, "red"))
-        SetFeldsColor (1.0, 0.0, 0.0);
+      MetabolizeMSEmotion(p);
     }
 
-    if (HasDescrip (p, "arousal"))
+    if (HasDescrip (p, "noise"))
     {
-      if (HasIngest (p, "value"))
-      {
-        float64 maxArausal = Ingest<float64>(p, "value");
+      MetabolizeNoiseLevel(p);
+    }
 
-        Participant *p = participants.Nth(0);
-        p->maxArausal = maxArausal;
-        p->minArausal = 1.0 - maxArausal;
-
-      }
+    if (HasDescrip (p, "audiomood"))
+    {
+      MetabolizeNoiseEmotion(p);
     }
   }
 
-  void DrawSelf ()
+  void MetabolizeMSEmotion(Protein prt)
   {
-    glLineWidth (2.0);
+    if (HasIngest (prt, "face-avg"))
+    {
+      Dictionary <Str,float64> dict = DictionaryFromIngest <Str,float64> (prt, "face-avg");
 
-      glColor4f (1.0, 0.0, 0.0, 1.0);
+      float64 anger = dict.ValFromKey("anger");
+      float64 contempt = dict.ValFromKey("contempt");
+      float64 disgust = dict.ValFromKey("disgust");
+      float64 fear = dict.ValFromKey("fear");
+      float64 happiness = dict.ValFromKey("happiness");
+      float64 neutral = dict.ValFromKey("neutral");
+      float64 sadness = dict.ValFromKey("sadness");
+      float64 surprise = dict.ValFromKey("surprise");
 
-      glBegin (GL_LINES);
+      Participant *p = participants.Nth(0);
+      p->maxArausal = (anger + fear) / 2.0;
+      p->minArausal = (disgust + sadness) / 2.0;
+      p->maxValence = (fear + contempt + disgust) / 3.0;
+      p->minValence = (surprise + happiness + neutral) / 3.0;
 
-        glVertex (Vect (0, -radius, 0));
-        glVertex (Vect (0, radius, 0));
-
-      glEnd ();
-
-      glBegin (GL_LINES);
-
-        glVertex (Vect (-radius, 0, 0));
-        glVertex (Vect (radius, 0, 0));
-
-      glEnd ();
-
-      glBegin (GL_LINES);
-
-        glVertex (Vect (-radius/2.0, -radius/2.0, 0));
-        glVertex (Vect (radius/2.0, radius/2.0, 0));
-
-      glEnd ();
-
-      glBegin (GL_LINES);
-
-        glVertex (Vect (-radius/2.0, radius/2.0, 0));
-        glVertex (Vect (radius/2.0, -radius/2.0, 0));
-
-      glEnd ();
+      EmotionDot *pp = emotions.Nth(0);
+      pp->setRadius(10);
+      pp->maxArausal = (anger + fear) / 2.0;
+      pp->minArausal = (disgust + sadness) / 2.0;
+      pp->maxValence = (fear + contempt + disgust) / 3.0;
+      pp->minValence = (surprise + happiness + neutral) / 3.0;
+    }
   }
+
+  void MetabolizeNoiseLevel(Protein prt)
+  {
+    if (HasIngest (prt, "noise"))
+    {
+      float64 noiseLevel = Ingest<float64>(prt, "noise");
+      noiseLevel = (noiseLevel / 6.0 * 2.0) - 1.0;
+
+      Participant *p = participants.Nth(0);
+      if (noiseLevel > 0)
+        p->maxArausal = fabs(noiseLevel);
+      else
+        p->minArausal = fabs(noiseLevel);
+    }
+  }
+
+  void MetabolizeNoiseEmotion(Protein prt)
+  {
+    float64 Neutrality = Ingest<float64>(prt, "neutrality");
+    float64 Happiness = Ingest<float64>(prt, "happiness");
+    float64 Sadness = Ingest<float64>(prt, "sadness");
+    float64 Anger = Ingest<float64>(prt, "anger");
+    float64 Fear = Ingest<float64>(prt, "fear");
+
+    Participant *p = participants.Nth(0);
+    p->maxArausal = (Anger + Neutrality) / 2.0;
+    p->minArausal = (Sadness + Neutrality) / 2.0;
+    p->maxValence = (Fear + Neutrality) / 2.0;
+    p->minValence = (Happiness + Neutrality) / 2.0;
+
+    EmotionDot *pp = emotions.Nth(0);
+    pp->maxArausal = (Anger + Neutrality) / 2.0;
+    pp->minArausal = (Sadness + Neutrality) / 2.0;
+    pp->maxValence = (Fear + Neutrality) / 2.0;
+    pp->minValence = (Happiness + Neutrality) / 2.0;
+  }
+
+//  void DrawSelf ()
+//  {
+//    glLineWidth (2.0);
+//
+//    glColor4f (1.0, 0.0, 0.0, 1.0);
+//
+//    DrawLine (Vect (0, -radius, 0),
+//              Vect (0, radius, 0));
+//    DrawLine (Vect (-radius, 0, 0),
+//              Vect (radius, 0, 0));
+//    DrawLine (Vect (-radius * 2.0/3.0, -radius * 2.0/3.0, 0),
+//              Vect (radius * 2.0/3.0, radius * 2.0/3.0, 0));
+//    DrawLine (Vect (-radius * 2.0/3.0, radius * 2.0/3.0, 0),
+//              Vect (radius * 2.0/3.0, -radius * 2.0/3.0, 0));
+//  }
 
 };
 
