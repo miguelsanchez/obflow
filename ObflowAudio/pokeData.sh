@@ -9,9 +9,8 @@ then
 	printf "$value"
 	printf "\n===========\n"
 	poke tcp://eixample.local/hackathon $protein 
-	rm -f $file
-else
-	echo "no data"
+	rm -f $protein
+# else
+	# echo "no data"
 fi
-sleep 0.2
 done
