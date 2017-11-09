@@ -15,4 +15,9 @@ Use greenhouse's poke command to read from the pipe and write to a pool
 poke -l t tcp://eixample.local/hackathon < /tmp/proteinPipe
 ```
 
-Start the Emotion main class giving the images directory and the named pipe as args.
+Start the Emotion main class giving the images directory and the named pipe as args. It should read and then delete the image files and send them to MS.
+
+With gradle:
+````
+./gradlew run -PimagesDir='../../frames' -PproteinPipe='/opt/oblong/greenhouse/bin/proteinPipe'
+````
