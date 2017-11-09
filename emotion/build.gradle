@@ -2,6 +2,12 @@ group 'com.oblong.hackathon'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
+apply plugin:'application'
+
+mainClassName = "Emotion"
+run {
+    args = [ "${imagesDir}", "${proteinPipe}" ]
+}
 
 sourceCompatibility = 1.8
 

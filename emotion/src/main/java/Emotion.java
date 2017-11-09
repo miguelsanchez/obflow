@@ -9,7 +9,6 @@ import java.io.*;
 import java.util.*;
 
 public class Emotion {
-    public static final String PROTEIN_PIPE = "/opt/oblong/greenhouse/bin/proteinPipe";
     private final OkHttpClient httpClient = new OkHttpClient();
     private final ObjectMapper jsonMapper;
     private final ObjectMapper yamlMapper;
@@ -18,8 +17,8 @@ public class Emotion {
     private boolean run = true;
 
     public static void main(String[] args) throws IOException {
-        if (args.length == 1) {
-            System.out.println("Reading images from dir " + args[0]);
+        if (args.length == 2) {
+            System.out.println("Reading images from dir " + args[0] + " and writing YAML proteins to " + args[1]);
             final File imagesDir = new File(args[0]);
             if (!imagesDir.isDirectory()) {
                 System.err.println(args[0] + " is not a directory.");
@@ -33,15 +32,15 @@ public class Emotion {
                 System.err.println(args[0] + " is not writable.");
                 return;
             }
-            final File proteinPipeFile = new File(PROTEIN_PIPE);
+            final File proteinPipeFile = new File(args[1]);
             if (!proteinPipeFile.canWrite()) {
-                System.err.println(PROTEIN_PIPE + " is not writable.");
+                System.err.println(args[1] + " is not writable.");
                 return;
             }
             final FileOutputStream proteinPipeOutputStream = new FileOutputStream(proteinPipeFile);
             new Emotion(proteinPipeOutputStream).monitorDirectory(imagesDir);
         } else {
-            System.err.println("give images directory to monitor as arg");
+            System.err.println("Give images directory to monitor and output file(or named pipe) for Greenhouse YAML proteins as args");
         }
     }
 
