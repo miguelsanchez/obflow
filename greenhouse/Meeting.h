@@ -49,7 +49,6 @@ struct Meeting  :  public Thing
   int64 dataPointCount;
 
   EmotionDot *mainEmotion;
-  Text *text;
 
 
   Meeting() : Thing ()
@@ -59,6 +58,48 @@ struct Meeting  :  public Thing
     float64 angle;
     radius = 8;
     float64 levelStep = 8;
+
+
+    Text *sur = new Text("Surprise");
+    sur -> SetFontSize (Feld () -> Width () / 40.0);
+    sur -> SetTranslationHard (Loc () + Feld () -> Over () * 55.0 + Feld () -> Up () * 65.0);
+    AppendKid (sur);
+
+    Text *hap = new Text("Happiness");
+    hap -> SetFontSize (Feld () -> Width () / 40.0);
+    hap -> SetTranslationHard (Loc () + Feld () -> Over () * 80.0 + Feld () -> Up () * 35.0);
+    AppendKid (hap);
+
+    Text *neu = new Text("Neutral");
+    neu -> SetFontSize (Feld () -> Width () / 40.0);
+    neu -> SetTranslationHard (Loc () + Feld () -> Over () * 80.0 + Feld () -> Up () * -25.0);
+    AppendKid (neu);
+
+    Text *sad = new Text("Sadness");
+    sad -> SetFontSize (Feld () -> Width () / 40.0);
+    sad -> SetTranslationHard (Loc () + Feld () -> Over () * 55.0 + Feld () -> Up () * -55.0);
+    AppendKid (sad);
+
+    Text *ang = new Text("Anger");
+    ang -> SetFontSize (Feld () -> Width () / 40.0);
+    ang -> SetTranslationHard (Loc () + Feld () -> Over () * -55 + Feld () -> Up () * 65.0);
+    AppendKid (ang);
+
+    Text *fear = new Text("Fear");
+    fear -> SetFontSize (Feld () -> Width () / 40.0);
+    fear -> SetTranslationHard (Loc () + Feld () -> Over () * -80.0 + Feld () -> Up () * 35.0);
+    AppendKid (fear);
+
+    Text *con = new Text("Contempt");
+    con -> SetFontSize (Feld () -> Width () / 40.0);
+    con -> SetTranslationHard (Loc () + Feld () -> Over () * -80.0 + Feld () -> Up () * -25.0);
+    AppendKid (con);
+
+    Text *dis = new Text("Disgust");
+    dis -> SetFontSize (Feld () -> Width () / 40.0);
+    dis -> SetTranslationHard (Loc () + Feld () -> Over () * -55.0 + Feld () -> Up () * -55.0);
+    AppendKid (dis);
+
 
 
     for (int j = 0 ; j < levels ; j++)
@@ -128,7 +169,7 @@ struct Meeting  :  public Thing
     mainEmotion = new EmotionDot (2);
     mainEmotion->color = Color (1.0, 1.0, 1.0, 1.0);
     mainEmotion->radius = 80;
-    AppendKid (mainEmotion);
+//    AppendKid (mainEmotion);
 
     dataPointCount = 0;
   }
