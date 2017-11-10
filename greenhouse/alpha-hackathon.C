@@ -69,6 +69,8 @@ struct Backgrounder  :  public Sketch
     {
       Dictionary <Str,float64> dict = DictionaryFromIngest <Str,float64> (prt, "face-avg");
       meetingSummary->AddDataPoint (dict);
+
+      lastmsEmotion = dict;
     }
   }
 
@@ -92,19 +94,19 @@ struct Backgrounder  :  public Sketch
     if (HasIngest (prt, "noise"))
     {
       float64 noiseLevel = Ingest<float64>(prt, "noise");
-      noiseLevel = (noiseLevel / 6.0 * 2.0) - 1.0;
+//      noiseLevel = noiseLevel / 6.0 * 2.0) - 1.0;
 
       Dictionary<Str, float64> dict;
       dict.Put("anger", boostValue(lastmsEmotion.Get("anger"), noiseLevel, true));
-      dict.Put("contempt", boostValue(lastmsEmotion.Get("contempt"), noiseLevel, false));
-      dict.Put("disgust", boostValue(lastmsEmotion.Get("disgust"), noiseLevel, false));
-      dict.Put("fear", boostValue(lastmsEmotion.Get("fear"), noiseLevel, false));
-      dict.Put("happiness", boostValue(lastmsEmotion.Get("happiness"), noiseLevel, true));
+      dict.Put("contempt", lastmsEmotion.Get("contempt"));
+      dict.Put("disgust", boostValue(lastmsEmotion.Get("disgust"), noiseLevel, true));
+      dict.Put("fear", lastmsEmotion.Get("fear"));
+      dict.Put("happiness", lastmsEmotion.Get("happiness"));
       dict.Put("neutral", lastmsEmotion.Get("neutral"));
-      dict.Put("sadness", boostValue(lastmsEmotion.Get("sadness"), noiseLevel, false));
+      dict.Put("sadness", boostValue(lastmsEmotion.Get("sadness"), noiseLevel, true));
       dict.Put("surprise", boostValue(lastmsEmotion.Get("surprise"), noiseLevel, true));
 
-//      meetingSummary->AddDataPoint (dict);
+      meetingSummary->AddDataPoint (dict);
     }
   }
 
@@ -112,20 +114,22 @@ struct Backgrounder  :  public Sketch
   {
 //    float64 sign = boost >= 0 ? 1 : -1;
 //    if (positiveCorrelation == boost > 0) {
-//      return sign + 0,0001; //sign * sqrt(sign * v); // Make bigger
+//      return sign * sqrt(sign * v); // Make bigger
 //    } else {
-//      return sign - 0,0001; //* pow(v, 2); // Make smaller
+//      return sign* pow(v, 2); // Make smaller
 //    }
 
-    float64 sign = boost >= 0 ? 1 : -1;
-    if (boost >= 0)
+    float64 sign = boost >= 1 ? 1 : -1;
+    if (positiveCorrelation && sign)
     {
-      return positiveCorrelation ? (v*0.9 + 1.0*0.1) : v;
+      return v*0.999 + 1.0*0.001;
     }
-    else
+    else if (!positiveCorrelation && !sign)
     {
-      return positiveCorrelation ? (v*0.9 - 0.0*0.1) : v;
+      return v*0.999 + 1.0*0.001;
     }
+
+//    return v;
   }
 
   void MetabolizeNoiseEmotion(Protein prt)
