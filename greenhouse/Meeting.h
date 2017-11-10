@@ -12,7 +12,7 @@
 #define Meeting_h
 
 #define ANGER_COLOR      Color (255.0/255.0, 52.0/255.0, 0.0/255.0, 0.3)
-#define FEAR_COLOR       Color (0.0/255.0, 0.0/255.0, 0.0/255.0, 0.3);
+#define FEAR_COLOR       Color (15.0/255.0, 15.0/255.0, 15.0/255.0, 0.3)
 #define CONTEMPT_COLOR   Color (195.0/255.0, 3.0/255.0, 121.0/255.0, 0.3)
 #define DISGUST_COLOR    Color (80.0/255.0, 0.0/255.0, 127.0/255.0, 0.3)
 #define SADNESS_COLOR    Color (37.0/255.0, 116.0/255.0, 188.0/255.0, 0.3)
@@ -36,14 +36,14 @@ struct Meeting  :  public Thing
 
   Trove<float64> emotions;
 
-  Trove<float64> angerDots;
-  Trove<float64> contemptDots;
-  Trove<float64> disgustDots;
-  Trove<float64> fearDots;
-  Trove<float64> happinessDots;
-  Trove<float64> neutralDots;
-  Trove<float64> sadnessDots;
-  Trove<float64> surpriseDots;
+  Trove<EmotionDot *> angerDots;
+  Trove<EmotionDot *> contemptDots;
+  Trove<EmotionDot *> disgustDots;
+  Trove<EmotionDot *> fearDots;
+  Trove<EmotionDot *> happinessDots;
+  Trove<EmotionDot *> neutralDots;
+  Trove<EmotionDot *> sadnessDots;
+  Trove<EmotionDot *> surpriseDots;
 
 
   int64 dataPointCount;
@@ -67,28 +67,56 @@ struct Meeting  :  public Thing
       for (int i = 0 ; i < slices ; i++ )
       {
         EmotionDot *emo = new EmotionDot (20);
-//        emo->color = SADNESS_COLOR;
         emo->radius = 20;
+
+        float64 cs = cos(angle*i*PI/180);
+        float64 sn = sin(angle*i*PI/180);
+        float64 smid = sin(45*PI/180);
+        float64 cmid = cos(45*PI/180);
+
         emo->SetTranslationHard(Loc ()
                                 + Feld () -> Over () * (radius + levelStep * j) * cos(angle*i*PI/180)
                                 + Feld () -> Up () * (radius + levelStep * j) * sin(angle*i*PI/180));
 
-        OB_LOG_INFO("%f, %f", cos(angle*i*PI/180),  sin(angle*i*PI/180));
-        if (cos(angle*i*PI/180) > cos(0) && sin(angle*i*PI/180) > 0.0)
+        if (cs >= 0 && cs <= cmid && sn <= 1 && sn >= smid)
         {
-          emo->SetAdjColor(SADNESS_COLOR);
-        }
-        else if (cos(angle*i*PI/180) > cos(0) && sin(angle*i*PI/180) < 0.0)
-        {
+          surpriseDots.Append (emo);
           emo->SetAdjColor(SURPRISE_COLOR);
         }
-        else if (cos(angle*i*PI/180) > cos(0) && sin(angle*i*PI/180) > 0.0)
+        else if (cs > cmid && cs <= 1.0 && sn <= smid && sn >= 0.0)
         {
+          happinessDots.Append (emo);
+          emo->SetAdjColor(HAPPINESS_COLOR);
+        }
+        else if (cs > cmid && cs <= 1.0 && sn < 0.0 && sn > -smid)
+        {
+          neutralDots.Append (emo);
+          emo->SetAdjColor(NEUTRAL_COLOR);
+        }
+        else if (cs > 0 && cs <= cmid && sn < -smid && sn >= -1.0)
+        {
+          sadnessDots.Append (emo);
           emo->SetAdjColor(SADNESS_COLOR);
         }
-        else if (cos(angle*i*PI/180) > cos(0) && sin(angle*i*PI/180) < 0.0)
+        else if (cs < 0 && cs >= -cmid && sn < -smid && sn >= -1.0)
         {
-          emo->SetAdjColor(SURPRISE_COLOR);
+          disgustDots.Append (emo);
+          emo->SetAdjColor(DISGUST_COLOR);
+        }
+        else if (cs < -cmid && cs >= -1.0 && sn < 0.0 && sn >= -smid)
+        {
+          contemptDots.Append (emo);
+          emo->SetAdjColor(CONTEMPT_COLOR);
+        }
+        else if (cs < -cmid && cs >= -1.0 && sn < smid && sn >= 0.0)
+        {
+          fearDots.Append (emo);
+          emo->SetAdjColor(FEAR_COLOR);
+        }
+        else if (cs <= 0 && cs >= -cmid && sn <= 1 && sn >= smid)
+        {
+          angerDots.Append (emo);
+          emo->SetAdjColor(ANGER_COLOR);
         }
 
         AppendKid (emo);
@@ -100,7 +128,7 @@ struct Meeting  :  public Thing
     mainEmotion = new EmotionDot (2);
     mainEmotion->color = Color (1.0, 1.0, 1.0, 1.0);
     mainEmotion->radius = 80;
-//    AppendKid (mainEmotion);
+    AppendKid (mainEmotion);
 
     dataPointCount = 0;
   }
@@ -126,6 +154,28 @@ struct Meeting  :  public Thing
     dataPointCount++;
 
     SetLargestColor();
+
+    updateRadiusOn(angerDots, "anger", dict);
+    updateRadiusOn(sadnessDots, "sadness", dict);
+    updateRadiusOn(fearDots, "fear", dict);
+    updateRadiusOn(happinessDots, "happiness", dict);
+    updateRadiusOn(contemptDots, "contempt", dict);
+    updateRadiusOn(neutralDots, "neutral", dict);
+    updateRadiusOn(surpriseDots, "surprise", dict);
+    updateRadiusOn(disgustDots, "disgust", dict);
+  }
+
+  void updateRadiusOn(Trove<EmotionDot *> dots, Str emotion, Dictionary<Str, float64>dict)
+  {
+    int convertFactor = 1000.0;
+    int minRadius = 10.0;
+    int maxRadius = 80.0;
+
+    for (int i = 0 ; i < dots.Count () ; i++)
+    {
+      EmotionDot *dot = dots.Nth(i);
+      dot->radius = Max(minRadius, Min(maxRadius, dict.ValFromKey(emotion) * convertFactor));
+    }
   }
 
   void SetLargestColor ()
@@ -143,7 +193,7 @@ struct Meeting  :  public Thing
 
     mainEmotion->SetAdjColor(c);
 //    mainEmotion->setNewColor(c);
-    mainEmotion->radius = 2.0;
+//    mainEmotion->radius = 2.0;
 //    mainEmotion->IncTranslation(Vect(1.0, 1.0, 1.0));
 //    IncTranslation (100.0 * Feld () -> Norm ());
   }

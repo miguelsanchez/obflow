@@ -76,6 +76,7 @@ struct Backgrounder  :  public Sketch
 
   void MetabolizeMSEmotion(Protein prt)
   {
+    OB_LOG_INFO("Hello");
     if (HasIngest (prt, "face-avg"))
     {
       Dictionary <Str,float64> dict = DictionaryFromIngest <Str,float64> (prt, "face-avg");
