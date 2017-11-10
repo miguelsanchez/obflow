@@ -231,12 +231,10 @@ struct Meeting  :  public Thing
     }
 
     Color c = ColorForIndex (largestIndex);
-
     mainEmotion->SetAdjColor(c);
-//    mainEmotion->setNewColor(c);
-//    mainEmotion->radius = 2.0;
-//    mainEmotion->IncTranslation(Vect(1.0, 1.0, 1.0));
-//    IncTranslation (100.0 * Feld () -> Norm ());
+    
+    //philips hue
+    ColorForBulb(largestIndex);
   }
 
   Color ColorForIndex (int64 ix)
@@ -273,8 +271,45 @@ struct Meeting  :  public Thing
 
     return c;
   }
-
-
+  
+  void ColorForBulb (int64 ix)
+  {
+    switch (ix)
+    {
+      case 0:
+        //      ANGER_COLOR;
+        system("curl -H \"Accept: application/json\" -X PUT --data '{\"on\": true, \"bri\":74, \"hue\":63, \"sat\":235}' http://192.168.0.106/api/f0DIcRLjDcZguQqqjsrVS5uVq8YHwQHdIqK7xC9H/lights/6/state");
+        break;
+      case 1:
+        //      CONTEMPT_COLOR;
+        system("curl -H \"Accept: application/json\" -X PUT --data '{\"on\": true, \"bri\":74, \"hue\":55839, \"sat\":239}' http://192.168.0.106/api/f0DIcRLjDcZguQqqjsrVS5uVq8YHwQHdIqK7xC9H/lights/6/state");
+        break;
+      case 2:
+        //      DISGUST_COLOR;
+        system("curl -H \"Accept: application/json\" -X PUT --data '{\"on\": true, \"bri\":74, \"hue\":49153, \"sat\":219}' http://192.168.0.106/api/f0DIcRLjDcZguQqqjsrVS5uVq8YHwQHdIqK7xC9H/lights/6/state");
+        break;
+      case 3:
+        //      FEAR_COLOR;
+        system("curl -H \"Accept: application/json\" -X PUT --data '{\"on\": false}' http://192.168.0.106/api/f0DIcRLjDcZguQqqjsrVS5uVq8YHwQHdIqK7xC9H/lights/6/state");
+        break;
+      case 4:
+        //      HAPPINESS_COLOR;
+        system("curl -H \"Accept: application/json\" -X PUT --data '{\"on\": true, \"bri\":74, \"hue\":5079, \"sat\":254}' http://192.168.0.106/api/f0DIcRLjDcZguQqqjsrVS5uVq8YHwQHdIqK7xC9H/lights/6/state");
+        break;
+      case 5:
+        //      NEUTRAL_COLOR;
+        system("curl -H \"Accept: application/json\" -X PUT --data '{\"on\": true, \"bri\":74, \"hue\":41497, \"sat\":63}' http://192.168.0.106/api/f0DIcRLjDcZguQqqjsrVS5uVq8YHwQHdIqK7xC9H/lights/6/state");
+        break;
+      case 6:
+        //      SADNESS_COLOR;
+        system("curl -H \"Accept: application/json\" -X PUT --data '{\"on\": true, \"bri\":74, \"hue\":42206, \"sat\":254}' http://192.168.0.106/api/f0DIcRLjDcZguQqqjsrVS5uVq8YHwQHdIqK7xC9H/lights/6/state");
+        break;
+      case 7:
+        //      SURPRISE_COLOR;
+        system("curl -H \"Accept: application/json\" -X PUT --data '{\"on\": true, \"bri\":74, \"hue\":10767, \"sat\":254}' http://192.168.0.106/api/f0DIcRLjDcZguQqqjsrVS5uVq8YHwQHdIqK7xC9H/lights/6/state");
+        break;
+    }
+  }
 };
 
 #endif /* Meeting_h */
