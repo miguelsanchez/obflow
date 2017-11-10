@@ -48,8 +48,6 @@ struct Meeting  :  public Thing
 
   int64 dataPointCount;
 
-  EmotionDot *mainEmotion;
-
 
   Meeting() : Thing ()
   {
@@ -165,12 +163,6 @@ struct Meeting  :  public Thing
       slices += 10;
     }
 
-
-    mainEmotion = new EmotionDot (2);
-    mainEmotion->color = Color (1.0, 1.0, 1.0, 1.0);
-    mainEmotion->radius = 80;
-//    AppendKid (mainEmotion);
-
     dataPointCount = 0;
   }
 
@@ -230,9 +222,6 @@ struct Meeting  :  public Thing
       }
     }
 
-    Color c = ColorForIndex (largestIndex);
-    mainEmotion->SetAdjColor(c);
-    
     //philips hue
     ColorForBulb(largestIndex);
   }

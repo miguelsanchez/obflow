@@ -64,7 +64,6 @@ struct Backgrounder  :  public Sketch
 
   void MetabolizeMSEmotion(Protein prt)
   {
-    OB_LOG_INFO("Hello");
     if (HasIngest (prt, "face-avg"))
     {
       Dictionary <Str,float64> dict = DictionaryFromIngest <Str,float64> (prt, "face-avg");
@@ -74,27 +73,11 @@ struct Backgrounder  :  public Sketch
     }
   }
 
-//  void MetabolizeNoiseLevel(Protein prt)
-//  {
-//    if (HasIngest (prt, "noise"))
-//    {
-//      float64 noiseLevel = Ingest<float64>(prt, "noise");
-//      noiseLevel = (noiseLevel / 6.0 * 2.0) - 1.0;
-//
-//      Participant *p = participants.Nth(0);
-//      if (noiseLevel > 0)
-//        p->maxArausal = fabs(noiseLevel);
-//      else
-//        p->minArausal = fabs(noiseLevel);
-//    }
-//  }
-
   void MetabolizeNoiseLevel(Protein prt)
   {
     if (HasIngest (prt, "noise"))
     {
       float64 noiseLevel = Ingest<float64>(prt, "noise");
-//      noiseLevel = noiseLevel / 6.0 * 2.0) - 1.0;
 
       Dictionary<Str, float64> dict;
       dict.Put("anger", boostValue(lastmsEmotion.Get("anger"), noiseLevel, true));
@@ -112,13 +95,6 @@ struct Backgrounder  :  public Sketch
 
   float64 boostValue(float64 v, float64 boost, bool positiveCorrelation)
   {
-//    float64 sign = boost >= 0 ? 1 : -1;
-//    if (positiveCorrelation == boost > 0) {
-//      return sign * sqrt(sign * v); // Make bigger
-//    } else {
-//      return sign* pow(v, 2); // Make smaller
-//    }
-
     float64 sign = boost >= 1 ? 1 : -1;
     if (positiveCorrelation && sign)
     {
@@ -128,8 +104,6 @@ struct Backgrounder  :  public Sketch
     {
       return v*0.999 + 1.0*0.001;
     }
-
-//    return v;
   }
 
   void MetabolizeNoiseEmotion(Protein prt)

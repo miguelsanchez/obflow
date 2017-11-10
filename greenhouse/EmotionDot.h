@@ -33,8 +33,6 @@ struct EmotionDot  :  public Points
     SetVertexLoc (0, Loc ());
     SetPointSize(0, 50);
 
-//    SetVertexColor (0, color);
-
     SetVerticesReady ();
 
     TranslationAnimateChase (0.25);
@@ -49,20 +47,6 @@ struct EmotionDot  :  public Points
     SetShaderUniform ("pointsize", radius);
     SetShaderUniform ("dotcolor", AdjColor ());
   }
-
-//  void setRadius (float64 newRadius)
-//  {
-//    radius = (radius + newRadius) / 2.0;
-//    IncTranslation(Vect(1.0, 1.0, 1.0));
-//  }
-
-//  void setNewColor (Color c)
-//  {
-//    color = c;
-//    SetVertexCount (1);
-//    SetVertexColor (0, color);
-//    SetVerticesReady ();
-//  }
 };
 
 
