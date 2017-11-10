@@ -3,7 +3,6 @@
 
 #include "Greenhouse.h"
 #include "EmotionDot.h"
-#include "Participant.h"
 #include "Meeting.h"
 
 
@@ -28,29 +27,16 @@
 struct Backgrounder  :  public Sketch
 {
   float64 radius;
-  Trove<Participant *> participants;
   Trove<EmotionDot *> emotions;
 
   Meeting *meetingSummary;
 
+  Dictionary<Str, float64> lastmsEmotion;
+
+
   Backgrounder() : Sketch ()
   {
     ParticipateInPool ("hackathon");
-
-    Dictionary<Str, float64> lastmsEmotion;
-
-    radius = 50.0;
-
-    Participant *p = new Participant();
-    AppendKid (p);
-    p->color = Color(0.0, 0.0, 1.0, 1.0);
-    p->radius = radius;
-    participants.Append (p);
-
-//    EmotionDot *pp = new EmotionDot(radius);
-//    pp->color = Color(1.0, 1.0, 1.0, 0.4);
-//    AppendKid (pp);
-//    emotions.Append (pp);
 
     meetingSummary = new Meeting();
     AppendKid (meetingSummary);
@@ -80,32 +66,24 @@ struct Backgrounder  :  public Sketch
     if (HasIngest (prt, "face-avg"))
     {
       Dictionary <Str,float64> dict = DictionaryFromIngest <Str,float64> (prt, "face-avg");
-
-      float64 anger = dict.ValFromKey("anger");
-      float64 contempt = dict.ValFromKey("contempt");
-      float64 disgust = dict.ValFromKey("disgust");
-      float64 fear = dict.ValFromKey("fear");
-      float64 happiness = dict.ValFromKey("happiness");
-      float64 neutral = dict.ValFromKey("neutral");
-      float64 sadness = dict.ValFromKey("sadness");
-      float64 surprise = dict.ValFromKey("surprise");
-
-      Participant *p = participants.Nth(0);
-      p->maxArausal = (anger + fear) / 2.0;
-      p->minArausal = (disgust + sadness) / 2.0;
-      p->maxValence = (fear + contempt + disgust) / 3.0;
-      p->minValence = (surprise + happiness + neutral) / 3.0;
-
-//      EmotionDot *pp = emotions.Nth(0);
-//      pp->setRadius(10);
-//      pp->maxArausal = (anger + fear) / 2.0;
-//      pp->minArausal = (disgust + sadness) / 2.0;
-//      pp->maxValence = (fear + contempt + disgust) / 3.0;
-//      pp->minValence = (surprise + happiness + neutral) / 3.0;
-
       meetingSummary->AddDataPoint (dict);
     }
   }
+
+//  void MetabolizeNoiseLevel(Protein prt)
+//  {
+//    if (HasIngest (prt, "noise"))
+//    {
+//      float64 noiseLevel = Ingest<float64>(prt, "noise");
+//      noiseLevel = (noiseLevel / 6.0 * 2.0) - 1.0;
+//
+//      Participant *p = participants.Nth(0);
+//      if (noiseLevel > 0)
+//        p->maxArausal = fabs(noiseLevel);
+//      else
+//        p->minArausal = fabs(noiseLevel);
+//    }
+//  }
 
   void MetabolizeNoiseLevel(Protein prt)
   {
@@ -114,11 +92,37 @@ struct Backgrounder  :  public Sketch
       float64 noiseLevel = Ingest<float64>(prt, "noise");
       noiseLevel = (noiseLevel / 6.0 * 2.0) - 1.0;
 
-      Participant *p = participants.Nth(0);
-      if (noiseLevel > 0)
-        p->maxArausal = fabs(noiseLevel);
-      else
-        p->minArausal = fabs(noiseLevel);
+      Dictionary<Str, float64> dict;
+      dict.Put("anger", boostValue(lastmsEmotion.Get("anger"), noiseLevel, true));
+      dict.Put("contempt", boostValue(lastmsEmotion.Get("contempt"), noiseLevel, false));
+      dict.Put("disgust", boostValue(lastmsEmotion.Get("disgust"), noiseLevel, false));
+      dict.Put("fear", boostValue(lastmsEmotion.Get("fear"), noiseLevel, false));
+      dict.Put("happiness", boostValue(lastmsEmotion.Get("happiness"), noiseLevel, true));
+      dict.Put("neutral", lastmsEmotion.Get("neutral"));
+      dict.Put("sadness", boostValue(lastmsEmotion.Get("sadness"), noiseLevel, false));
+      dict.Put("surprise", boostValue(lastmsEmotion.Get("surprise"), noiseLevel, true));
+
+//      meetingSummary->AddDataPoint (dict);
+    }
+  }
+
+  float64 boostValue(float64 v, float64 boost, bool positiveCorrelation)
+  {
+//    float64 sign = boost >= 0 ? 1 : -1;
+//    if (positiveCorrelation == boost > 0) {
+//      return sign + 0,0001; //sign * sqrt(sign * v); // Make bigger
+//    } else {
+//      return sign - 0,0001; //* pow(v, 2); // Make smaller
+//    }
+
+    float64 sign = boost >= 0 ? 1 : -1;
+    if (boost >= 0)
+    {
+      return positiveCorrelation ? (v*0.9 + 1.0*0.1) : v;
+    }
+    else
+    {
+      return positiveCorrelation ? (v*0.9 - 0.0*0.1) : v;
     }
   }
 
@@ -130,35 +134,20 @@ struct Backgrounder  :  public Sketch
     float64 Anger = Ingest<float64>(prt, "anger");
     float64 Fear = Ingest<float64>(prt, "fear");
 
-    Participant *p = participants.Nth(0);
-    p->maxArausal = (Anger + Neutrality) / 2.0;
-    p->minArausal = (Sadness + Neutrality) / 2.0;
-    p->maxValence = (Fear + Neutrality) / 2.0;
-    p->minValence = (Happiness + Neutrality) / 2.0;
 
-//    EmotionDot *pp = emotions.Nth(0);
-//    pp->maxArausal = (Anger + Neutrality) / 2.0;
-//    pp->minArausal = (Sadness + Neutrality) / 2.0;
-//    pp->maxValence = (Fear + Neutrality) / 2.0;
-//    pp->minValence = (Happiness + Neutrality) / 2.0;
+    Dictionary<Str, float64> dict;
+
+    dict.Put ("anger", lastmsEmotion.ValFromKey("anger") * 0.8 + Anger * 0.2);
+    dict.Put ("surprise", lastmsEmotion.ValFromKey("surprise") * 0.8 + Happiness * 0.2);
+    dict.Put ("fear", lastmsEmotion.ValFromKey("fear") * 0.8 + Fear * 0.2);
+    dict.Put ("sadness", lastmsEmotion.ValFromKey("sadness") * 0.8 + Sadness * 0.2);
+    dict.Put ("contempt", lastmsEmotion.ValFromKey("contempt") * 0.9 + Neutrality * 0.1);
+    dict.Put ("neutral", lastmsEmotion.ValFromKey("neutral") * 0.9 + Neutrality * 0.1);
+    dict.Put ("disgust", lastmsEmotion.ValFromKey("disgust") * 0.9 + Neutrality * 0.1);
+    dict.Put ("happiness", lastmsEmotion.ValFromKey("happiness") * 0.9 + Neutrality * 0.1);
+
+    meetingSummary->AddDataPoint (dict);
   }
-
-//  void DrawSelf ()
-//  {
-//    glLineWidth (2.0);
-//
-//    glColor4f (1.0, 0.0, 0.0, 1.0);
-//
-//    DrawLine (Vect (0, -radius, 0),
-//              Vect (0, radius, 0));
-//    DrawLine (Vect (-radius, 0, 0),
-//              Vect (radius, 0, 0));
-//    DrawLine (Vect (-radius * 2.0/3.0, -radius * 2.0/3.0, 0),
-//              Vect (radius * 2.0/3.0, radius * 2.0/3.0, 0));
-//    DrawLine (Vect (-radius * 2.0/3.0, radius * 2.0/3.0, 0),
-//              Vect (radius * 2.0/3.0, -radius * 2.0/3.0, 0));
-//  }
-
 };
 
 void Setup ()

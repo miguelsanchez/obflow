@@ -26,8 +26,6 @@ struct EmotionDot  :  public Points
   {
     radius = r;
 
-//    SetSize (5000);
-
     LoadShaders ("shaders/hackathon-foggy.vert", "shaders/null.frag");
 
     SetVertexCount (10);

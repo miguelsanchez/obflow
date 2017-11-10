@@ -34,9 +34,7 @@
 
 /* Begin PBXFileReference section */
 		491EE2701FB4ED5D0084BA1B /* EmotionDot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmotionDot.h; sourceTree = "<group>"; };
-		491EE2711FB4EE8C0084BA1B /* Participant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Participant.h; sourceTree = "<group>"; };
 		491EE2721FB4F89C0084BA1B /* Meeting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Meeting.h; sourceTree = "<group>"; };
-		49CBF7D51FB511E1002EE89D /* EmotionDotImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmotionDotImage.h; sourceTree = "<group>"; };
 		5649DC4016F921580048F7B1 /* alpha-hackathon */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "alpha-hackathon"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5649DC4D16F921CF0048F7B1 /* libBasement.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libBasement.2.dylib; path = "/opt/oblong/deps-64-8/.bon-jovi/lib/libBasement.2.dylib"; sourceTree = "<absolute>"; };
 		5649DC4E16F921CF0048F7B1 /* libImpetus.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libImpetus.2.dylib; path = "/opt/oblong/deps-64-8/.bon-jovi/lib/libImpetus.2.dylib"; sourceTree = "<absolute>"; };
@@ -75,9 +73,7 @@
 		5649DC3516F921580048F7B1 = {
 			isa = PBXGroup;
 			children = (
-				49CBF7D51FB511E1002EE89D /* EmotionDotImage.h */,
 				491EE2721FB4F89C0084BA1B /* Meeting.h */,
-				491EE2711FB4EE8C0084BA1B /* Participant.h */,
 				491EE2701FB4ED5D0084BA1B /* EmotionDot.h */,
 				5649DC5F16F921F60048F7B1 /* OpenGL.framework */,
 				5649DC5D16F921E20048F7B1 /* libGreenhouse.dylib */,
