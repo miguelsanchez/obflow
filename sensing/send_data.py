@@ -1,7 +1,7 @@
 import serial
 from subprocess import call
 
-raw = serial.Serial('/dev/tty.usbmodem1411', 115200)
+raw = serial.Serial('/dev/tty.usbmodem49', 115200)
 
 
 x = 1
