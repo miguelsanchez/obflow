@@ -4,6 +4,8 @@
 #include "Greenhouse.h"
 #include "EmotionDot.h"
 #include "Participant.h"
+#include "Meeting.h"
+
 
 /**
   When using new resource files please be sure to do the following in order to
@@ -29,10 +31,13 @@ struct Backgrounder  :  public Sketch
   Trove<Participant *> participants;
   Trove<EmotionDot *> emotions;
 
+  Meeting *meetingSummary;
 
   Backgrounder() : Sketch ()
   {
     ParticipateInPool ("hackathon");
+
+    Dictionary<Str, float64> lastmsEmotion;
 
     radius = 50.0;
 
@@ -42,10 +47,13 @@ struct Backgrounder  :  public Sketch
     p->radius = radius;
     participants.Append (p);
 
-    EmotionDot *pp = new EmotionDot(radius);
-    pp->color = Color(1.0, 1.0, 1.0, 0.4);
-    AppendKid (pp);
-    emotions.Append (pp);
+//    EmotionDot *pp = new EmotionDot(radius);
+//    pp->color = Color(1.0, 1.0, 1.0, 0.4);
+//    AppendKid (pp);
+//    emotions.Append (pp);
+
+    meetingSummary = new Meeting();
+    AppendKid (meetingSummary);
   }
 
   void Metabolize (const Protein &p)
@@ -87,12 +95,14 @@ struct Backgrounder  :  public Sketch
       p->maxValence = (fear + contempt + disgust) / 3.0;
       p->minValence = (surprise + happiness + neutral) / 3.0;
 
-      EmotionDot *pp = emotions.Nth(0);
-      pp->setRadius(10);
-      pp->maxArausal = (anger + fear) / 2.0;
-      pp->minArausal = (disgust + sadness) / 2.0;
-      pp->maxValence = (fear + contempt + disgust) / 3.0;
-      pp->minValence = (surprise + happiness + neutral) / 3.0;
+//      EmotionDot *pp = emotions.Nth(0);
+//      pp->setRadius(10);
+//      pp->maxArausal = (anger + fear) / 2.0;
+//      pp->minArausal = (disgust + sadness) / 2.0;
+//      pp->maxValence = (fear + contempt + disgust) / 3.0;
+//      pp->minValence = (surprise + happiness + neutral) / 3.0;
+
+      meetingSummary->AddDataPoint (dict);
     }
   }
 
@@ -125,11 +135,11 @@ struct Backgrounder  :  public Sketch
     p->maxValence = (Fear + Neutrality) / 2.0;
     p->minValence = (Happiness + Neutrality) / 2.0;
 
-    EmotionDot *pp = emotions.Nth(0);
-    pp->maxArausal = (Anger + Neutrality) / 2.0;
-    pp->minArausal = (Sadness + Neutrality) / 2.0;
-    pp->maxValence = (Fear + Neutrality) / 2.0;
-    pp->minValence = (Happiness + Neutrality) / 2.0;
+//    EmotionDot *pp = emotions.Nth(0);
+//    pp->maxArausal = (Anger + Neutrality) / 2.0;
+//    pp->minArausal = (Sadness + Neutrality) / 2.0;
+//    pp->maxValence = (Fear + Neutrality) / 2.0;
+//    pp->minValence = (Happiness + Neutrality) / 2.0;
   }
 
 //  void DrawSelf ()

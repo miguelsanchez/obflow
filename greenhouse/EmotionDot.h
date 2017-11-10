@@ -20,23 +20,28 @@ struct EmotionDot  :  public Points
 
   Color color;
 
+  Str emotionStr;
+
   EmotionDot (float64 r) : Points ()
   {
     radius = r;
 
+//    SetSize (5000);
+
     LoadShaders ("shaders/hackathon-foggy.vert", "shaders/null.frag");
 
-    SetVertexCount (1);
+    SetVertexCount (10);
 
     SetVertexLoc (0, Loc ());
-
     SetPointSize(0, 50);
-    SetVertexColor (0, color);
+
+//    SetVertexColor (0, color);
 
     SetVerticesReady ();
 
     TranslationAnimateChase (0.25);
     ScaleAnimateChase (0.75);
+    ColorAnimateAsymp (0.75);
   }
 
   void AssignShaderInputs ()
@@ -44,13 +49,22 @@ struct EmotionDot  :  public Points
     SetShaderUniform ("system_distance", Loc () . DistFrom (CameraLoc ()));
     SetShaderUniform ("camera_position", CameraLoc ());
     SetShaderUniform ("pointsize", radius);
+    SetShaderUniform ("dotcolor", AdjColor ());
   }
 
-  void setRadius (float64 newRadius)
-  {
-    radius = (radius + newRadius) / 2.0;
-    IncTranslation(Vect(1.0, 1.0, 1.0));
-  }
+//  void setRadius (float64 newRadius)
+//  {
+//    radius = (radius + newRadius) / 2.0;
+//    IncTranslation(Vect(1.0, 1.0, 1.0));
+//  }
+
+//  void setNewColor (Color c)
+//  {
+//    color = c;
+//    SetVertexCount (1);
+//    SetVertexColor (0, color);
+//    SetVerticesReady ();
+//  }
 };
 
 
