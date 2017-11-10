@@ -33,6 +33,8 @@ struct Backgrounder  :  public Sketch
 
   Dictionary<Str, float64> lastmsEmotion;
 
+  bool settled;
+
 
   Backgrounder() : Sketch ()
   {
@@ -148,12 +150,112 @@ struct Backgrounder  :  public Sketch
 
     meetingSummary->AddDataPoint (dict);
   }
+  
+  ///// Events
+  
+  void Blurt (BlurtEvent *e)
+  {
+    settled = false;
+    ZeroTime();
+    // 2D
+    int64 translation_amount = 10;
+    
+    if (e -> Wordstamp () == "a") {
+      IncTranslation (-translation_amount * Feld () -> Over ());
+    } else if (e -> Wordstamp () == "d") {
+      IncTranslation (translation_amount * Feld () -> Over ());
+    } else if (e -> Wordstamp () == "w") {
+      IncTranslation (translation_amount * 1 * Feld () -> Up ());
+    } else if (e -> Wordstamp () == "s") {
+      IncTranslation (-translation_amount * 1 * Feld () -> Up ());
+    } else if (e -> Wordstamp () == "q") {
+      CenterOnClosestKid();
+    }
+    
+    //3D
+    if (e -> Wordstamp () == "o") {
+      IncTranslation (translation_amount * 2 * Feld () -> Norm ());
+    } else if (e -> Wordstamp () == "l") {
+      IncTranslation (-translation_amount * 2 * Feld () -> Norm ());
+    }
+  }
+  
+  void BlurtVanish (BlurtEvent *e)
+  {
+    ZeroTime();
+  }
+  
+  void DisplacementAppear (DisplacementEvent *e)
+  {
+    if (IsHeedless ()) {
+      Heed (e);
+      INFORM ("Pose began at: " + ToStr (e -> EstabLoc ()));
+    }
+  }
+  
+  void DisplacementMove (DisplacementEvent *e)
+  {
+    if (IsHeedless ()) {
+      Heed (e);
+      INFORM ("Pose began at: " + ToStr (e -> EstabLoc ()));
+    }
+    
+    if (e -> Wordstamp () == "v") {
+      if (IsHeeding (e)) {
+        IncTranslationHard (1.0 * e -> CurLinearDelta ());
+        Vect total_disp = e -> CumuLinearOffset ();
+        INFORM ("Total Displacement: " + ToStr (total_disp));
+        ZeroTime();
+        settled = false;
+      }
+    }
+  }
+  
+  void DisplacementVanish (DisplacementEvent *e)
+  {
+    if (IsHeeding (e))
+      StopHeeding ();
+  }
+  
+  void CenterOnClosestKid ()
+  {
+    Thing *closestKid = NthKid <Thing> (0);
+    if (! closestKid)
+      return;
+    
+    Vect cent = Feld () -> Loc ();
+    
+    float64 closest_dist = cent . DistFrom (closestKid -> Loc ());
+    for (int i = 1; i < KidCount(); i++)
+    { Thing *kid = NthKid <Thing> (i);
+      if (kid)
+      { float64 dist = cent . DistFrom (kid -> Loc ());
+        if (dist < closest_dist)
+        { closest_dist = dist;
+          closestKid = kid;
+        }
+      }
+    }
+    
+    SetTranslation (Feld () -> Loc () - closestKid -> Translation ());
+  }
+  
+  void Travail ()
+  {
+    if (CurTime() > 2.0 && ! settled) {
+      CenterOnClosestKid ();
+      settled = true;
+    }
+  }
 };
 
 void Setup ()
 {
+  RegisterDisplacement ("v", VictoryPose);
+  
   Backgrounder *b = new Backgrounder();
   b -> SlapOnFeld ();
+  b -> TranslationAnimateQuadratic(0.33);
 }
 
 
