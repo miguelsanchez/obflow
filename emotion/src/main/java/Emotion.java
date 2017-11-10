@@ -15,9 +15,10 @@ public class Emotion {
     private final OutputStream outputStream;
     private final NonCloseableOutputStream nonCloseableOutputStream;
     private boolean run = true;
+    private String username;
 
     public static void main(String[] args) throws IOException {
-        if (args.length == 2) {
+        if (args.length >= 2) {
             System.out.println("Reading images from dir " + args[0] + " and writing YAML proteins to " + args[1]);
             final File imagesDir = new File(args[0]);
             if (!imagesDir.isDirectory()) {
@@ -38,7 +39,11 @@ public class Emotion {
                 return;
             }
             final FileOutputStream proteinPipeOutputStream = new FileOutputStream(proteinPipeFile);
-            new Emotion(proteinPipeOutputStream).monitorDirectory(imagesDir);
+            final Emotion emotion = new Emotion(proteinPipeOutputStream);
+            if (args.length == 3) {
+                emotion.setUsername(args[2]);
+            }
+            emotion.monitorDirectory(imagesDir);
         } else {
             System.err.println("Give images directory to monitor and output file(or named pipe) for Greenhouse YAML proteins as args");
         }
@@ -146,20 +151,28 @@ public class Emotion {
                     //System.out.println(jsonMapper.writeValueAsString(faces));
 
                     final ResultProtein resultProtein = new ResultProtein();
-                    int faceIndex = 0;
-                    final Scores avgScores = new Scores();
-                    for (final Face face : faces) {
-                        resultProtein.addScores("face" + faceIndex++, face.scores);
-                        avgScores.add(face.scores);
-                    }
-                    if (faceIndex > 0) {
-                        avgScores.avg(faceIndex);
-                        resultProtein.addScores("face-avg", avgScores);
+                    if (username == null) {
+                        int faceIndex = 0;
+                        final Scores avgScores = new Scores();
+                        for (final Face face : faces) {
+                            resultProtein.addScores("face" + faceIndex++, face.scores);
+                            avgScores.add(face.scores);
+                        }
+                        if (faceIndex > 0) {
+                            avgScores.avg(faceIndex);
+                            resultProtein.addScores("face-avg", avgScores);
+                        }
+                    } else if (!faces.isEmpty()){
+                        resultProtein.addScores(username, faces.get(0).scores);
                     }
                     yamlMapper.writeValue(nonCloseableOutputStream, resultProtein);
                 }
             }
         });
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public static class FaceRectangle {
