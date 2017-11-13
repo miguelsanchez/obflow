@@ -265,37 +265,38 @@ struct Meeting  :  public Thing
   {
     switch (ix)
     {
+      // Remember to set the right IP or disable it otherwise it freezes the app
       case 0:
         //      ANGER_COLOR;
-        system("curl -H \"Accept: application/json\" -X PUT --data '{\"on\": true, \"bri\":74, \"hue\":63, \"sat\":235}' http://192.168.0.106/api/f0DIcRLjDcZguQqqjsrVS5uVq8YHwQHdIqK7xC9H/lights/6/state");
+        system("curl -H \"Accept: application/json\" -X PUT --data '{\"on\": true, \"bri\":74, \"hue\":63, \"sat\":235}' http://192.168.65.58/api/f0DIcRLjDcZguQqqjsrVS5uVq8YHwQHdIqK7xC9H/lights/6/state");
         break;
       case 1:
         //      CONTEMPT_COLOR;
-        system("curl -H \"Accept: application/json\" -X PUT --data '{\"on\": true, \"bri\":74, \"hue\":55839, \"sat\":239}' http://192.168.0.106/api/f0DIcRLjDcZguQqqjsrVS5uVq8YHwQHdIqK7xC9H/lights/6/state");
+        system("curl -H \"Accept: application/json\" -X PUT --data '{\"on\": true, \"bri\":74, \"hue\":55839, \"sat\":239}' http://192.168.65.58/api/f0DIcRLjDcZguQqqjsrVS5uVq8YHwQHdIqK7xC9H/lights/6/state");
         break;
       case 2:
         //      DISGUST_COLOR;
-        system("curl -H \"Accept: application/json\" -X PUT --data '{\"on\": true, \"bri\":74, \"hue\":49153, \"sat\":219}' http://192.168.0.106/api/f0DIcRLjDcZguQqqjsrVS5uVq8YHwQHdIqK7xC9H/lights/6/state");
+        system("curl -H \"Accept: application/json\" -X PUT --data '{\"on\": true, \"bri\":74, \"hue\":49153, \"sat\":219}' http://192.168.65.58/api/f0DIcRLjDcZguQqqjsrVS5uVq8YHwQHdIqK7xC9H/lights/6/state");
         break;
       case 3:
         //      FEAR_COLOR;
-        system("curl -H \"Accept: application/json\" -X PUT --data '{\"on\": false}' http://192.168.0.106/api/f0DIcRLjDcZguQqqjsrVS5uVq8YHwQHdIqK7xC9H/lights/6/state");
+        system("curl -H \"Accept: application/json\" -X PUT --data '{\"on\": false}' http://192.168.65.58/api/f0DIcRLjDcZguQqqjsrVS5uVq8YHwQHdIqK7xC9H/lights/6/state");
         break;
       case 4:
         //      HAPPINESS_COLOR;
-        system("curl -H \"Accept: application/json\" -X PUT --data '{\"on\": true, \"bri\":74, \"hue\":5079, \"sat\":254}' http://192.168.0.106/api/f0DIcRLjDcZguQqqjsrVS5uVq8YHwQHdIqK7xC9H/lights/6/state");
+        system("curl -H \"Accept: application/json\" -X PUT --data '{\"on\": true, \"bri\":74, \"hue\":5079, \"sat\":254}' http://192.168.65.58/api/f0DIcRLjDcZguQqqjsrVS5uVq8YHwQHdIqK7xC9H/lights/6/state");
         break;
       case 5:
         //      NEUTRAL_COLOR;
-        system("curl -H \"Accept: application/json\" -X PUT --data '{\"on\": true, \"bri\":74, \"hue\":41497, \"sat\":63}' http://192.168.0.106/api/f0DIcRLjDcZguQqqjsrVS5uVq8YHwQHdIqK7xC9H/lights/6/state");
+        system("curl -H \"Accept: application/json\" -X PUT --data '{\"on\": true, \"bri\":74, \"hue\":41497, \"sat\":63}' http://192.168.65.58/api/f0DIcRLjDcZguQqqjsrVS5uVq8YHwQHdIqK7xC9H/lights/6/state");
         break;
       case 6:
         //      SADNESS_COLOR;
-        system("curl -H \"Accept: application/json\" -X PUT --data '{\"on\": true, \"bri\":74, \"hue\":42206, \"sat\":254}' http://192.168.0.106/api/f0DIcRLjDcZguQqqjsrVS5uVq8YHwQHdIqK7xC9H/lights/6/state");
+        system("curl -H \"Accept: application/json\" -X PUT --data '{\"on\": true, \"bri\":74, \"hue\":42206, \"sat\":254}' http://192.168.65.58/api/f0DIcRLjDcZguQqqjsrVS5uVq8YHwQHdIqK7xC9H/lights/6/state");
         break;
       case 7:
         //      SURPRISE_COLOR;
-        system("curl -H \"Accept: application/json\" -X PUT --data '{\"on\": true, \"bri\":74, \"hue\":10767, \"sat\":254}' http://192.168.0.106/api/f0DIcRLjDcZguQqqjsrVS5uVq8YHwQHdIqK7xC9H/lights/6/state");
+        system("curl -H \"Accept: application/json\" -X PUT --data '{\"on\": true, \"bri\":74, \"hue\":10767, \"sat\":254}' http://192.168.65.58/api/f0DIcRLjDcZguQqqjsrVS5uVq8YHwQHdIqK7xC9H/lights/6/state");
         break;
     }
   }
